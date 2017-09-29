@@ -1,0 +1,53 @@
+{% extends 'twitter/_base.html' %}
+{% load staticfiles %}
+
+{% block title %}Weclome to Twitter!{% endblock title %}
+
+{% block header %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="{% static '/twitter/js/main.js' %}"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Mukta" rel="stylesheet">
+<link rel="stylesheet" href="{% static '/twitter/css/style.css' %}">
+
+{% endblock header %}
+
+{% block main %}
+<a href="/users">Log out</a>
+<div>
+    <h1>Welcome to Twitter</h1> 
+</div>
+
+<div>
+	{% if user.is_authenticated %}
+	<h2>Weclome back, @{{ user.get_username }}!</h2>
+	{% endif %}
+</div>
+<div>
+	<p hidden id="user">{{ user.get_username }}</p>
+</div>
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-8">
+			<form id="create-tweet">
+				<h3>Create a Tweet!</h3><br>
+				<input type="text" name="tweet" placeholder="Place your tweet here" id="textinput">
+				<input type="submit" class="btn btn-success" name="submit" value="submit">
+				<input type="hidden" value="{{ user.get_username }}" id="created_by">
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div id="tweetlist" class="row justify-content-center">
+
+	</div>
+</div>
+
+{% endblock main %}
+
+{% block footer %} {% endblock footer %}
